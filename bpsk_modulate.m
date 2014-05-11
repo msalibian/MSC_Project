@@ -19,14 +19,24 @@ function [xn_noise_if, sigpow] = bpsk_modulate(n, fs, sps, fif, dsss, sd)
 	
 	%filter span in symbols, default is 10
 	%filtSpanInSymbols = 10;
-	filtSpanInSymbols = 55;
+	filtSpanInSymbols = 25;
 	%alpha as indicated in the paper
-	rolloff = .5;
+	rolloff = 1;
 	%create raised cosine receive filter system object
 	hTxFilter = comm.RaisedCosineTransmitFilter(...
 	'RolloffFactor', rolloff, ...
 	'FilterSpanInSymbols', filtSpanInSymbols, ...
-	'OutputSamplesPerSymbol', sps); 
+	'OutputSamplesPerSymbol', sps, ...
+	'Shape', 'Normal'); 
+
+%{
+  rCosSpec=fdesign.pulseshaping(sps,'Raised Cosine','Nsym,Beta',filtSpanInSymbols,rolloff);
+  hTxFilter = design(rCosSpec);
+  upsampled = upsample(modData, sps) ;
+  FltDelay = sps*(filtSpanInSymbols-1)/2;
+  xn = filter (hTxFilter , [ upsampled ; zeros(FltDelay,1) ] );
+%}
+
 	%modulate bpsk signal with raised cosine filter	
 	xn = step(hTxFilter, modData);
 
@@ -35,8 +45,10 @@ function [xn_noise_if, sigpow] = bpsk_modulate(n, fs, sps, fif, dsss, sd)
 	%transpose time sequence to obtain column vector
 	t = t';
 	
-	%mix to low intermediate frequency
-	xn = real(xn.*exp(i*2*pi*fif*t));
+	%mix to low intermediate frequency, fif
+	%xn = real(xn.*exp(i*2*pi*fif*t));
+	%and initial phase
+	xn = real(xn.*exp(i*2*pi*(fif*t+rand(1))));
 
 	%generate noise sequence
 	nn = sd*randn(length(xn),1);

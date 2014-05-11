@@ -54,8 +54,10 @@ randi([0 1], ceil(n/2), 1)];
 	%transpose time sequence to obtain column vector
 	t = t';
 
-	%mix to low intermediate frequency	
-	xn = real(xn.*exp(i*2*pi*fif*t));
+	%mix to low intermediate frequency, fif
+	%xn = real(xn.*exp(i*2*pi*fif*t));
+	%and initial phase
+	xn = real(xn.*exp(i*2*pi*(fif*t+rand(1))));
 	
 	%generate noise sequence
 	nn = sd*randn(length(xn),1);

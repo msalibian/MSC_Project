@@ -11,14 +11,32 @@ function [xn_noise_if, sigpow] = ook_modulate(n, fs, sps, fif, sd)
 	t = t';
 	
 	%mix to low intermediate frequency, fif
-	xn = real(xn.*exp(i*2*pi*fif*t));
-
+	%xn = real(xn.*exp(i*2*pi*fif*t));
+	%and initial phase
+	u = rand(1);
+	xn_if = real(xn.*exp(i*2*pi*(fif*t+u)));
+	
 	%generate noise sequence
-	nn = sd*randn(length(xn),1);
+	nn = sd*randn(length(xn_if),1);
 	%add noise to received signal
-	xn_noise_if = xn + nn;
+	xn_noise_if = xn_if + nn;
 	%calculate signal power for this sample
-	sigpow = mean((xn).^2);
+	sigpow = mean((xn_if).^2);
+
+	%calculate ber if ber_flag == true
+	%{
+	if ber_flag == true
+		hDemod = comm.PAMDemodulator(2, 'BitOutput' ,true);
+		hError = comm.ErrorRate('ComputationDelay', 1);
+		
+		xn_if_cmpx = xn.*exp(i*2*pi*(fif*t+u));
+		xn_noise_if_cmpx = xn_if_cmpx + nn;
+		
+		xn_received = step(hDemod, xn_noise_if_cmpx);
+		%xn_received = real(xn_noise_if_cmpx.*exp(-i*2*pi*(fif*t+u)));
+		ber = step(hError, xn, xn_received);
+	end		
+	%}
 end
 	
 	

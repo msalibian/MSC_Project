@@ -20,7 +20,7 @@ the ratios of the two maximums where they occur are off.
 
 %parameters
 fs = 6.25e6; %sampling frequency
-Rs = 2e5; %symbol rate
+Rs = 4e5; %symbol rate
 dsss = 4; %spreading factor
 sps = round(fs/Rs); %samples per symbol
 fif = 1e6; %low intermediate frequency
@@ -31,14 +31,15 @@ B1 = 36; B2 = 18; %feature_extract for m3 and m4
 %run this if we know the signal power
 sigpow = .5;
 %run this if we do NOT know the signal power
-%{sigpow = 0;
-L = 1000;
-for l = 1:L
-	[temp, sigpow_tmp] = oqpsk_modulate(ceil(1e5/sps), fs, sps, fif, dsss, 1);
-	sigpow = sigpow + sigpow_tmp;
-	l
-end
-sigpow = sigpow/L;
+%{
+%sigpow = 0;
+%L = 1000;
+%for l = 1:L
+%	[temp, sigpow_tmp] = oqpsk_modulate(ceil(1e5/sps), fs, sps, fif, dsss, 1);
+%	sigpow = sigpow + sigpow_tmp;
+%	l
+%end
+%sigpow = sigpow/L;
 %}	
 
 
