@@ -9,7 +9,9 @@ setGeneric("setupParams", function(.Object){
 	
 setMethod("setupParams", "ImportWrapper", function(.Object){
 	
-	path = "/ubc/ece/home/ll/grads/kenl/MSC_Project/Data/HeaderNames/namesDat.txt"
+	#path = "/ubc/ece/home/ll/grads/kenl/MSC_Project/Data/HeaderNames/namesDat.txt"
+	path = "C://Users//Ken//Desktop//School//MSC_Project//Data//HeaderNames//namesDat.txt"
+	
 	namesDf = read.table(path, header=F, stringsAsFactors=F)
 	namesDf = namesDf[,1]
 	namesMods = c("ook", "bpsk", "oqpsk", "bfskA", "bfskB", "bfskR2", "noise")
@@ -19,7 +21,8 @@ setMethod("setupParams", "ImportWrapper", function(.Object){
 	nX = 145
 	P = 50
 	P2 = 200
-	root = "/ubc/ece/home/ll/grads/kenl/MSC_Project/Data/Mods"
+	#root = "/ubc/ece/home/ll/grads/kenl/MSC_Project/Data/Mods"
+	root = "C://Users//Ken//Desktop//School//MSC_Project//Data//Mods"
 	inf_ptrnTrn = paste0("N", N, "_P", P, "_snrdB", snrdbRange[1], 
 									":", snrdbRange[2], "_nX", nX)
 	infsTrn = list.files(root, pattern=inf_ptrnTrn, recursive=T, full.names=T, 

@@ -1,18 +1,21 @@
 
 ## Data ##
-source("Code/Train/Data/ImportWrapper.R")
-source("Code/Train/Data/Importer.R")
-source("Code/Train/Data/Parser.R")
+source("Data//ImportWrapper.R")
+source("Data//Importer.R")
+source("Data//Parser.R")
 
 ## Logic ##
-source("Code/Train/Logic/ParamGrid.R")
-source("Code/Train/Logic/ModelProcedure.R")
-source("Code/Train/Logic/Model.R")
-source("Code/Train/Logic/Experiment/experimentProcedure.R")
+source("Logic//ParamGrid.R")
+source("Logic//ModelProcedure.R")
+source("Logic//Model.R")
 
 #Models
-source("Code/Train/Logic/TreeSimple.R")
-source("Code/Train/Logic/RandomForest.R")
+source("Logic//TreeSimple.R")
+source("Logic//RandomForest.R")
+
+
+source("Logic//Experiment//experimentProcedure.R")
+
 
 #sourceDirectory("Code/Train/Source_Classes", modifiedOnly=F) 
 #sourceDirectory("Code/Train/Classes/StaticFunctions", modifiedOnly=F)

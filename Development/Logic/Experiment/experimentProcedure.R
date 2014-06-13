@@ -47,9 +47,9 @@ setMethod("experimentProcedure", "RandomForest",
 		
 	Experiment.setup(xCombnDf=xCombnDf, parser=parser)
 
-	ntree = c(250, 500, 750)
+	ntree = c(400, 750)
 	mtry = c(8, 12, 16)
-	pSel = c(.3, .4, .5)
+	pSel = c(.3, .5)
 	
 	modelGrid = expand.grid("ntree"=ntree, "mtry"=mtry, "pSel"=pSel)
 		

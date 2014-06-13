@@ -1,15 +1,18 @@
 
 rm(list=ls())
 
-setwd("/ubc/ece/home/ll/grads/kenl/MSC_Project")
+#setwd("/ubc/ece/home/ll/grads/kenl/MSC_Project")
+setwd("C://Users//Ken//Documents//GitHub//MSC_Project//Development")
 
 library(rpart)
 library(plyr)
 library(stringr)
 library(R.utils)
 library(randomForest)
+library(doSNOW)
+library(snow)
 
-source("Code/Train/Main/Methods/sourceFiles.R")
+source("Main//Methods//sourceFiles.R")
 
 objParser = new("Parser")
 parser = importParse(objParser)
@@ -24,10 +27,13 @@ inplyrGeneric = function(xCombnDf, .Object, parser){
 	experimentProcedure(.Object=.Object, xCombnDf=xCombnDf, 
 		parser=parser)
 }
-		
+
+cl<-makeCluster(3)
+registerDoSNOW(cl)
+
 ddply(combnDfRf, .(m, k, n, nmod, model), inplyrGeneric, 
-	.Object="RandomForest", parser=parser)
+	.Object="RandomForest", parser=parser, .parallel=TRUE)
 	
-	
+stopCluster(cl)	
 	
 	
