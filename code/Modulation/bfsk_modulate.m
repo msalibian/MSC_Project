@@ -31,17 +31,6 @@ data(:,3), data(:,4), 'UniformOutput', false);
 		data_3of6 = cell2mat(data_3of6);
 		data = data_3of6;
 	end
-
-%{
-	if strcmp(enc, '3of6')
-		data = [randi([0 1], ceil(n/2), 1), ... 
-randi([0 1], ceil(n/2), 1)];
-		data_3of6 = arrayfun(@threeofsix, data(:,1), data(:,2), ...
-'UniformOutput', false);
-		data_3of6 = cell2mat(data_3of6);
-		data = data_3of6(:);
-	end
-%}
 	
 	%create modulator system object
 	hMod = comm.FSKModulator(2, fd, Rs, ...
@@ -56,9 +45,6 @@ randi([0 1], ceil(n/2), 1)];
 
 	xn_if_cmpx = xn.*exp(i*2*pi*(fif*t+rand(1)));
 	
-	%mix to low intermediate frequency, fif
-	%xn = real(xn.*exp(i*2*pi*fif*t));
-	%and initial phase
 	xn_if = real(xn_if_cmpx);
 	
 	%generate noise sequence

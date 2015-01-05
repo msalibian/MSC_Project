@@ -29,14 +29,6 @@ function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = bpsk_modulate(n, fs, sps,
 	'OutputSamplesPerSymbol', sps, ...
 	'Shape', 'Normal'); 
 
-%{
-  rCosSpec=fdesign.pulseshaping(sps,'Raised Cosine','Nsym,Beta',filtSpanInSymbols,rolloff);
-  hTxFilter = design(rCosSpec);
-  upsampled = upsample(modData, sps) ;
-  FltDelay = sps*(filtSpanInSymbols-1)/2;
-  xn = filter (hTxFilter , [ upsampled ; zeros(FltDelay,1) ] );
-%}
-
 	%modulate bpsk signal with raised cosine filter	
 	xn = step(hTxFilter, modData);
 
@@ -47,9 +39,6 @@ function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = bpsk_modulate(n, fs, sps,
 	
 	xn_if_cmpx = xn.*exp(i*2*pi*(fif*t+rand(1))).*sqrt(norm_factor);
 	
-	%mix to low intermediate frequency, fif
-	%xn = real(xn.*exp(i*2*pi*fif*t));
-	%and initial phase
 	xn_if = real(xn_if_cmpx);
 	
 	%generate noise sequence

@@ -17,7 +17,7 @@ P = 50; % for train data
 % signal-to-noise ratio
 snrdB_vec = -25:1:13;
 % indicate number of columns in total
-nX = 141;
+nX = 140;
 
 ook_config_wrapper(out_dir, N, P, snrdB_vec, nX);
 bpsk_config_wrapper(out_dir, N, P, snrdB_vec, nX);
@@ -25,7 +25,8 @@ oqpsk_config_wrapper(out_dir, N, P, snrdB_vec, nX);
 bfskA_config_wrapper(out_dir, N, P, snrdB_vec, nX);
 bfskB_config_wrapper(out_dir, N, P, snrdB_vec, nX);
 bfskR2_config_wrapper(out_dir, N, P, snrdB_vec, nX);
-noise_config_wrapper(out_dir, N, P, snrdB_vec, nX);
+
+
 
 
 

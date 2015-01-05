@@ -42,9 +42,6 @@ function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = oqpsk_modulate(n, fs, sps
 	
 	xn_if_cmpx = xn.*exp(i*2*pi*(fif*t+rand(1)));
 	
-	%mix to low intermediate frequency, fif
-	%xn = real(xn.*exp(i*2*pi*fif*t));
-	%and initial phase
 	xn_if = real(xn_if_cmpx);
 	
 	%generate noise sequence

@@ -7,14 +7,21 @@ function out = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn)
 	end
 	
 	if exist('nn', 'var')
-		%s2_n = var(nn); %OLD
-		sd_nn = std(nn);
-		ep_nn = .05*sd_nn*randn(length(nn),1);
-		s2_n = (1/N)*sum((nn+ep_nn).^2);
-		%s2_n = (1/N)*sum(nn.^2);
-		e = (1/N)*sum(xn.^2);
-		enull = e/s2_n;
-		snrdB_hat = 10*log10((e-s2_n)/s2_n);
+		% standard deviation of noise
+        sd_nn = std(nn);
+		% small amount of noise to add to noise power estimate
+        ep_nn = .05*sd_nn*randn(length(nn),1);
+		% We are required to estimate the power of the noise 
+        %  in real-time. However, for our simulations, we 
+        %  add some error as a proxy to the 
+        %  estimation error in estimating the noise in real-time.
+        s2_n = (1/N)*sum((nn+ep_nn).^2);
+		% energy
+        e = (1/N)*sum(xn.^2);
+		% energy normalized by variance
+        enull = e/s2_n;
+		% snr estimate (included as feature)
+        snrdB_hat = 10*log10((e-s2_n)/s2_n);
 		%if snrdB_hat is complex number due to e-s2_n negative
 		if ~isreal(snrdB_hat) | isinf(snrdB_hat)
 			snrdB_hat = -200;
@@ -22,37 +29,32 @@ function out = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn)
 	else
 		e = 0;
 		snrdB_hat = 0;
-	end
+    end
 	
-	acf = autocorr(xn, 23);
-	Qstat = N*sum(acf(2:end).^2);
-	
-	%[Xk_abs Ak_abs an an_abs_norm] = spectrum_extract(xn);
-	
-	%dft to get frequency domain representation
+	% dft to get frequency domain representation
 	Xk_tmp = fft(xn);
 	Xk = Xk_tmp(1:ceil(N/2));
 	
-	%calculate absolute of Xk
+	% calculate absolute of Xk
 	Xk_abs = abs(Xk);
-	%frequency index. Not the actual frequency
+	% frequency index. Not the actual frequency
 	k = (1:ceil(N/2))';
 	
-	%obtain analytical representation of x[n]
-	%calculate analytical representation of x[n]
+	% obtain analytical representation of x[n]
+	% calculate analytical representation of x[n]
 	an = hilbert(xn);
-	%calculate absolute value of an
-	%according to sources, this is also the instantaneous amplitude
+	% calculate absolute value of an
+	% according to sources, this is also the instantaneous amplitude
 	an_abs = abs(an);
-	%calculate mean value of an_abs
+	% calculate mean value of an_abs
 	ma = mean(an_abs);
-	%calculate normalized absolute anlytical signal
+	% calculate normalized absolute anlytical signal
 	an_abs_norm = an_abs/ma;
-	%calculate dtft of an_abs_norm
+	% calculate dtft of an_abs_norm
 	Ak_tmp = fft(an_abs_norm);
 	Ak = Ak_tmp(1:ceil(N/2));
 	
-	%pre-specified frequency index for m1 and m2
+	% pre-specified frequency index for m1 and m2
 	Ak_abs = abs(Ak);
 	
 	m1 = max(Ak_abs(k1)) + max(Ak_abs(k2));
@@ -72,11 +74,6 @@ function out = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn)
 	idx1_m5 = max(1,(m4+1-B2/2)):min((m4+1+B2/2),ceil(N/2));
 	idx2_m5 = max(1,(m4+1-B1/2)):min((m4+1+B1/2),ceil(N/2));
 	m5 = sum(Xk_abs(idx1_m5))/sum(Xk_abs(idx2_m5));
-
-	%threshold for non-weak segments
-	At = quantile(an_abs, .75);
-	idx = find(an_abs > At);
-	C = length(idx);
 	
 	%instantaneous amplitude features 
 	acn_abs_norm = an_abs_norm - 1;
@@ -85,30 +82,7 @@ function out = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn)
 	Akc_abs = abs(Akc);
 	
 	gammaMax = max((Akc_abs(2:end)).^2)/N;
-	%sigmaAa = sqrt((1/N)*sum(acn_abs_norm.^2) - ((1/N)*sum(abs(acn_abs_norm)))^2);
-	%sigmaA = sqrt((1/C)*sum(acn_abs_norm(idx).^2) - ((1/C)*sum(acn_abs_norm(idx)))^2);
 	
-	%instantaneous phase
-	phi = angle(an);
-	
-	%sd of instantaneous phase
-	phiNL = phi - mean(phi);
-	%sigmaAp = sqrt((1/C)*sum(phiNL(idx).^2) - ((1/C)*sum(abs(phiNL(idx))))^2);
-	%sigmaDp = sqrt((1/C)*sum(phiNL(idx).^2) - ((1/C)*sum(phiNL(idx)))^2);
-	
-	%instantaneous frequency
-	%[temp freq] = hilbert2(xn, fs);
-	%mf = (1/N)*sum(freq);
-	%freqm = freq - mf;
-	%freqN = freqm/Rs;
-	%sigmaNf = sqrt((1/C)*sum(freqN(idx).^2) - ((1/C)*sum(abs(freqN(idx))))^2);
-	%sigmaAf = sqrt((1/N)*sum(freqN.^2) - ((1/N)*sum(abs(freqN)))^2);
-	
-	%kurtosis (Overview of Feature-Based ...)
-	%mu42A = mean(acn_abs_norm.^4)/mean(acn_abs_norm.^2);
-%	mu42F = mean(freqN.^4)/mean(freqN.^2);
-	
-	%(Overview of Feature-Based...)
 	%max value of DFT of analytical form
 	an2_abs = an_abs.^2;
 	an4_abs = an_abs.^4;
@@ -138,7 +112,7 @@ function out = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn)
 	CRIII = (1/N)*sum(R_an.*(I_an.^3)) - CRI*CII - CRI*CII - CRI*CII;
 	CIIII = (1/N)*sum(I_an.^4) - 3*CII;
 	
-	out = [m1 m2 m3 m4 m5 enull Qstat snrdB_hat gammaMax gamma2 gamma4 ...
+	out = [m1 m2 m3 m4 m5 enull snrdB_hat gammaMax gamma2 gamma4 ...
 CRR CRI CII ...
 CRRR CRRI CRII CIII CRRRR CRRRI CRRII CRIII CIIII Xk_abs(45:160)'];
 	

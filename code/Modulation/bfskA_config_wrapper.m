@@ -28,12 +28,12 @@ function bfskA_config_wrapper(out_dir, N, P, snrdB_vec, nX)
 			X_all(k,:) = [snrdB feat_vals 4];
 			k = k + 1;
 		end	
-		s
+		fprintf('Run SNR: %d Complete\n', s);
 	end	
 	
 	outf = strcat(out_dir, '/bfskA_N', num2str(N), '_P', ...
 num2str(P), '_snrdB', ... 
-strcat(num2str(min(snrdB_vec)), ':', num2str(max(snrdB_vec))), ...
+strcat(num2str(min(snrdB_vec)), '-', num2str(max(snrdB_vec))), ...
 '_nX', num2str(nX), '.csv');
 	
 	csvwrite(outf, X_all);
