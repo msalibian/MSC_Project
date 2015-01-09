@@ -25,23 +25,19 @@ function bfskR2_config_wrapper(out_dir, N, P, snrdB_vec, nX)
 		snrdB = snrdB_vec(s);
 		for p = 1:P
 			fifi = fif + randi([0 9], 1, 1)*6e4;
-			[xn_tmp, temp, nn_tmp, xn_cmpx_tmp] = bfsk_modulate(ceil(2*N/sps/2), fs, Rs, fd, sps, fifi, enc, sd);
+			[xn_tmp, temp, nn_tmp] = bfsk_modulate(ceil(2*N/sps/2), fs, Rs, fd, sps, fifi, enc, sd);
 			xn = xn_tmp(N:2*N-1);
 			nn = nn_tmp(N:2*N-1);
-			xn_cmpx = xn_cmpx_tmp(N:2*N-1);
-			feat_vals = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn);
+			feat_vals = feature_extract(xn, k1, k2, B1, B2, nn);
 			X_all(k,:) = [snrdB feat_vals 6];
 			k = k + 1;
 		end	
 		fprintf('Run SNR: %d Complete\n', s);
 	end	
 	
-	outf = strcat(out_dir, '/bfskR2_N', num2str(N), '_P', ...
-num2str(P), '_snrdB', ... 
-strcat(num2str(min(snrdB_vec)), '-', num2str(max(snrdB_vec))), ...
-'_nX', num2str(nX), '.csv');
+	outf = strcat(out_dir, '/bfskR2_P', num2str(P), '.csv');
 	
 	csvwrite(outf, X_all);
 
 end	
-	
+

@@ -1,6 +1,6 @@
 % function for modulation of ook
 % n - length of bit sequence
-function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = ook_modulate(n, fs, sps, fif, sd, norm_factor)
+function [xn_noise_if, sigpow, nn] = ook_modulate(n, fs, sps, fif, sd, norm_factor)
 	% random binary sequence
 	data = randi([0 1], n, 1);
 	
@@ -24,16 +24,6 @@ function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = ook_modulate(n, fs, sps, 
 	xn_noise_if = xn_if + nn;
 	% calculate signal power for this sample
 	sigpow = mean((imag(xn_if_cmpx)).^2);
-
-	% noise component for imaginary part for features that use
-	% imaginary part of signal
-	nn_cmpx = sd*sqrt(-1)*randn(length(xn_if), 1);
-	
-	xn_noise_if_cmpx = xn_if_cmpx + nn + nn_cmpx;
-
-	if ~all(real(xn_noise_if_cmpx) == xn_noise_if)
-		error('ook complex and real received signals differ')
-    end
     
 end
 	

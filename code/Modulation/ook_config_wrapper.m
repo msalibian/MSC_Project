@@ -30,24 +30,20 @@ function ook_config_wrapper(out_dir, N, P, snrdB_vec, nX)
 			% essentially we doubled the obs window size as input 
             %  however, in the next line of code, we keep only the 
             %  second half of the signal
-            [xn_tmp, temp, nn_tmp, xn_cmpx_tmp] = ook_modulate(ceil(2*N/sps), fs, sps, fif, sd, norm_factor);
+            [xn_tmp, temp, nn_tmp] = ook_modulate(ceil(2*N/sps), fs, sps, fif, sd, norm_factor);
             % real part of received signal
             xn = xn_tmp(N:2*N-1);
 			% noise
             nn = nn_tmp(N:2*N-1);
 			% complex part of received signal
-            xn_cmpx = xn_cmpx_tmp(N:2*N-1);
-			feat_vals = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn);
+			feat_vals = feature_extract(xn, k1, k2, B1, B2, nn);
 			X_all(k,:) = [snrdB feat_vals 1];
 			k = k + 1;
 		end	
 		fprintf('Run SNR: %d Complete\n', s);
 	end
 	
-	outf = strcat(out_dir, '/ook_N', num2str(N), '_P', ...
-num2str(P), '_snrdB', ... 
-strcat(num2str(min(snrdB_vec)), '-', num2str(max(snrdB_vec))), ...
-'_nX', num2str(nX), '.csv');
+	outf = strcat(out_dir, '/ook_P', num2str(P), '.csv');
 	
 	csvwrite(outf, X_all);
 

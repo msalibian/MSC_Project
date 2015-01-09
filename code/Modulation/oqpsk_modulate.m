@@ -1,4 +1,4 @@
-function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = oqpsk_modulate(n, fs, sps, fif, dsss, sd)
+function [xn_noise_if, sigpow, nn] = oqpsk_modulate(n, fs, sps, fif, dsss, sd)
 	
 	%symbol to chip mapping for oqpsk
 	%symbol for oqpsk is made from 4 bits, so there are 2^4
@@ -51,14 +51,6 @@ function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = oqpsk_modulate(n, fs, sps
 	xn_noise_if = xn_if + nn;
 	%calculate signal power for this sample
 	sigpow = mean(xn_if.^2);
-	
-	nn_cmpx = sd*sqrt(-1)*randn(length(xn_if), 1);
-	
-	xn_noise_if_cmpx = xn_if_cmpx + nn + nn_cmpx;
-	
-	if ~all(real(xn_noise_if_cmpx) == xn_noise_if)
-		error('ook complex and real received signals differ')
-	end
-	
+
 end
 

@@ -1,10 +1,6 @@
 
-function out = feature_extract(xn, k1, k2, B1, B2, xn_cmpx, nn)
+function out = feature_extract(xn, k1, k2, B1, B2, nn)
 	N = length(xn);
-	
-	if ~all(real(xn_cmpx) == xn)
-		error('in feature_extract: complex and real received signals differ')
-	end
 	
 	if exist('nn', 'var')
 		% standard deviation of noise

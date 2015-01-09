@@ -1,5 +1,5 @@
 
-function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = bfskA_modulate(n, fs, Rs, fd, sps, fif, enc, sd)
+function [xn_noise_if, sigpow, nn] = bfskA_modulate(n, fs, Rs, fd, sps, fif, enc, sd)
 	%enc is an encoding option which should be specified
 	%as either 'Manchester' or '3of6' strings
 	
@@ -54,14 +54,6 @@ data(:,3), data(:,4), 'UniformOutput', false);
 	xn_noise_if = xn_if + nn;
 	%calculate signal power for this sample
 	sigpow = mean(xn_if.^2);
-	
-	nn_cmpx = sd*sqrt(-1)*randn(length(xn_if), 1);
-	
-	xn_noise_if_cmpx = xn_if_cmpx + nn + nn_cmpx;
-	
-	if ~all(real(xn_noise_if_cmpx) == xn_noise_if)
-		error('ook complex and real received signals differ')
-	end
-	
+		
 end
 

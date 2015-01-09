@@ -11,9 +11,9 @@ out_dir = 'C:/Users/Ken/Documents/GitHub/MSC_Project/data/Modulation';
 % observation window size
 N = 512;
 % number of samples per modulation and snrdb
-P = 50; % for train data
+%P = 50; % for train data
 %P = 60; % for validation data 
-%P = 200; % for test data
+P = 200; % for test data
 % signal-to-noise ratio
 snrdB_vec = -25:1:13;
 % indicate number of columns in total

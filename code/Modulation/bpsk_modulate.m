@@ -1,4 +1,4 @@
-function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = bpsk_modulate(n, fs, sps, fif, dsss, sd, norm_factor)
+function [xn_noise_if, sigpow, nn] = bpsk_modulate(n, fs, sps, fif, dsss, sd, norm_factor)
 	%symbol to chip mapping in IEEE 802.15.4
 	pn(:,1) = [1 1 1 1 0 1 0 1 1 0 0 1 0 0 0]';
 	pn(:,2) = [0 0 0 0 1 0 1 0 0 1 1 0 1 1 1]';
@@ -49,15 +49,7 @@ function [xn_noise_if, sigpow, nn, xn_noise_if_cmpx] = bpsk_modulate(n, fs, sps,
 	%calculate signal power for this sample
 	%sigpow = mean(xn_if.^2);
 	sigpow = mean((imag(xn_if_cmpx)).^2);
-	
-	nn_cmpx = sd*sqrt(-1)*randn(length(xn_if), 1);
-	
-	xn_noise_if_cmpx = xn_if_cmpx + nn + nn_cmpx;
-	
-	if ~all(real(xn_noise_if_cmpx) == xn_noise_if)
-		error('bpsk complex and real received signals differ')
-	end
-	
+		
 end
 	
 	
