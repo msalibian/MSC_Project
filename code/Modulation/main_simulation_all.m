@@ -2,7 +2,6 @@
 clear
 
 % path containing the scripts to run simulations
-%addpath('/ubc/ece/home/ll/grads/kenl/MSC_Project/Code/Automation')
 addpath('C:/Users/Ken/Documents/GitHub/MSC_Project/code/Modulation')
 
 % data output directory for modulation data
