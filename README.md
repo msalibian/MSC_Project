@@ -8,9 +8,7 @@
 
 **UBC**
 
-This README file guides us through the workflow of our study. The workflow consists of 3 major components. 
-First, modulation data is generated through MATLAB. Then, 3 models are trained using R or MATLAB.
-Finally, predicitive performance is verified for each model.
+This README file guides us through the workflow of our study. The workflow consists of 3 major components. First, modulation data is generated through MATLAB. Then, FBT is implemented in MATLAB. CT and RF are trained in R. Finally, predicitive performance is verified for each model.
 
 ### Modulation Simulation
 The code that performs the simulation is in ["code/Modulation"](https://github.com/kenlau177/MSC_Project/tree/master/code/Modulation).
