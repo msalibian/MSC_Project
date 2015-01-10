@@ -31,10 +31,10 @@ Input:
 
 Output: 
 - A text file with the predicted versus true modulation type as a function of SNR.
-- The first column corresponds to the SNR
-- The second column is the true modulation type
-- The third column is the predicted modulation type
-- Stored in ["data/Fitted/fbTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree")
+..- The first column corresponds to the SNR
+..- The second column is the true modulation type
+..- The third column is the predicted modulation type
+..- Stored in ["data/Fitted/fbTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree")
 
 
 
