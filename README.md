@@ -36,7 +36,7 @@ Output:
   * The third column is the predicted modulation type
   * Stored in ["data/Fitted/fbTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree")
 
-
+<img src="visualizations/flow-fit-fbTree.png" width="350" height="250">
 
 
 
