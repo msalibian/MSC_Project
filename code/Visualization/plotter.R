@@ -121,7 +121,8 @@ plotter.plot = function(ggdata){
 plotter.process = function(combnDf){
   
   resDfType = plotter.generateSummaries(combnDf)
-  
+  plotter.generatePlots(combnDf, resDfType)
+  return(NULL)
   
 }
 
