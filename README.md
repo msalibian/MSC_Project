@@ -24,9 +24,17 @@ There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to t
 <img src="visualizations/flow-simulating-mods.png" width="350" height="250">
 
 #### Fit Feature-Based Tree
+Run ["code/Train/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/mainFbTree.m) to fit the feature-based tree.
 
+Input: 
+- Training and testing modulation data directly from the output of the previous step.
 
-
+Output: 
+- A text file with the predicted versus true modulation type as a function of SNR.
+- The first column corresponds to the SNR
+- The second column is the true modulation type
+- The third column is the predicted modulation type
+- Stored in ["data/Fitted/fbTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree")
 
 
 
