@@ -12,6 +12,8 @@ This README file guides us through the workflow of our study. The workflow consi
 
 This guide is complementary to the paper (to be posted later). 
 
+<img src="visualizations/flow-bigPicture.png" width="450" height="300">
+
 #### Simulating Modulation Data
 The code that performs the simulation is in ["code/Modulation"](https://github.com/kenlau177/MSC_Project/tree/master/code/Modulation).
 
