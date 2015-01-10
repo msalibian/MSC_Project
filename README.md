@@ -26,6 +26,8 @@ There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to t
 #### Fit Feature-Based Tree
 Run ["code/Train/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/mainFbTree.m) to fit the feature-based tree.
 
+Depends on fbTree.m, aggregate.m, calculateThreshold.m, and predFbTree.m. Can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
+
 Input: 
 - Training and testing modulation data directly from the output of the previous step.
 
