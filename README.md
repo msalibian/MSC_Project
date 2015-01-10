@@ -15,6 +15,10 @@ The code that performs the simulation is in ["code/Modulation"](https://github.c
 
 In particular, ["code/Modulation/main_simulation_all.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Modulation/main_simulation_all.m) script is automated to simulate the modulation data. Note that MATLAB's Communication Toolbox is required.
 
+Data is output to ["data/Modulation"](https://github.com/kenlau177/MSC_Project/tree/master/data/Modulation). 
+
+![image](https://raw.githubusercontent.com/kenlau177/MSC_Project/master/visualizations/flow-simulating-mods.png)
+
 #### Fit Feature-Based Tree
 To 
 
