@@ -17,7 +17,7 @@ In particular, ["code/Modulation/main_simulation_all.m"](https://github.com/kenl
 
 Data is output to ["data/Modulation"](https://github.com/kenlau177/MSC_Project/tree/master/data/Modulation). 
 
-![image](https://raw.githubusercontent.com/kenlau177/MSC_Project/master/visualizations/flow-simulating-mods.png)
+![image](https://raw.githubusercontent.com/kenlau177/MSC_Project/master/visualizations/flow-simulating-mods.png =100x20)
 
 #### Fit Feature-Based Tree
 To 
