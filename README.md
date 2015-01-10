@@ -21,10 +21,12 @@ Data is output to ["data/Modulation"](https://github.com/kenlau177/MSC_Project/t
 
 There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to the paper for more details. In the paper, P=50 corresponds to the training data and P=200 corresponds to the testing data.
 
-<img src="visualizations/flow-simulating-mods.png" width="350" height="250">
+<img src="visualizations/flow-simulating-mods.png" width="450" height="300">
 
 #### Fit Feature-Based Tree
 Run ["code/Train/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/mainFbTree.m) to fit the feature-based tree.
+
+Depends on fbTree.m, aggregate.m, calculateThreshold.m, and predFbTree.m. Can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
 
 Input: 
 - Training and testing modulation data directly from the output of the previous step.
@@ -36,7 +38,7 @@ Output:
   * The third column is the predicted modulation type
   * Stored in ["data/Fitted/fbTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree")
 
-<img src="visualizations/flow-fit-fbTree.png" width="350" height="250">
+<img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
 
 
