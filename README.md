@@ -14,7 +14,7 @@ This guide is complementary to the paper (to be posted later).
 
 Big Picture:
 
-<img src="visualizations/flow-bigPicture.png" width="450" height="180">
+<img src="visualizations/flow-bigPicture.png" width="450" height="160">
 
 #### Simulating Modulation Data
 The code that performs the simulation is in ["code/Modulation"](https://github.com/kenlau177/MSC_Project/tree/master/code/Modulation).
