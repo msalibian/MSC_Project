@@ -100,8 +100,8 @@ Output:
  * when m1,...,m5 are used
  * when all features are used
 
-<img src="visualizations/pred-performance-nok.png" width="450" height="200"> 
+<img src="visualizations/pred-performance-nok.png" width="450" height="250"> 
  
-<img src="visualizations/pred-performance-k.png" width="450" height="200"> 
+<img src="visualizations/pred-performance-k.png" width="450" height="250"> 
 
-<img src="visualizations/flow-validate-performance.png" width="450" height="200">
+<img src="visualizations/flow-validate-performance.png" width="450" height="250">
