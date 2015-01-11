@@ -30,7 +30,7 @@ There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to t
 #### Fit Feature-Based Tree
 Run ["code/Train/fbTree/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree/mainFbTree.m) to fit and test the fbTree.
 
-Depends on several functions. They can be found in: ["code/Train/fbTree"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree)
+Script mainFbTree.m depends on several functions. They can be found in: ["code/Train/fbTree"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree)
 
 Input: 
 - Raw modulation data directly from the output of the previous step.
@@ -66,7 +66,7 @@ We fit and test the cTree and rForest models. Based on the paper, we consider th
 
 Run ["code/Train/main.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/main.R) to fit the cTree and rForest.
 
-Depends on cTree.R, rForest.R, and procedure.R. They can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
+Script main.R depends on cTree.R, rForest.R, and procedure.R. They can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
 
 Input: 
 - combined training and testing data
@@ -84,5 +84,19 @@ Output:
 <img src="visualizations/flow-fit-cTree-rForest.png" width="450" height="200">
 
 #### Validating Predictive Performance
+Predictive performance is validated based on the proportion of correct modulation predictions. 
 
+Run ["code/Visualization/mainPlotter.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Visualization/mainPlotter.R) to validate the performance of each model.
 
+Script mainPlotter.R depends on ["plotter.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Visualization/plotter.R).
+
+Input:
+- The text files of predicted versus true modulation type from fitting and testing the models
+ * fbTree.txt, cTree_k.txt, cTree_nok.txt, rForest_k.txt, rForest_nok.txt
+ * Files can be found in ["data/Fitted"](https://github.com/kenlau177/MSC_Project/tree/master/data/Fitted)
+
+Output:
+- 
+
+ 
+ 
