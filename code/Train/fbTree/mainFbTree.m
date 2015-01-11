@@ -1,7 +1,7 @@
 
 clear
 
-addpath('code/Train')
+addpath('code/Train/fbTree')
 
 P = 50; %training data
 P2 = 200; %testing data
@@ -12,6 +12,13 @@ oqpskTrn = csvread(strcat('data/Modulation/oqpsk_P', num2str(P), '.csv'));
 bfskATrn = csvread(strcat('data/Modulation/bfskA_P', num2str(P), '.csv'));
 bfskBTrn = csvread(strcat('data/Modulation/bfskB_P', num2str(P), '.csv'));
 bfskR2Trn = csvread(strcat('data/Modulation/bfskR2_P', num2str(P), '.csv'));
+
+% The worst-case plots of Figure 3 in Kuba's paper (Development and 
+%		Implementation...) suggests that outliers may have been removed 
+%		from some parts of the data. In particular, see the worst-case 
+%		plot of m2. 
+[ookTrn, bpskTrn, oqpskTrn, bfskATrn, bfskBTrn, bfskR2Trn] = whisker_fn(...
+	ookTrn, bpskTrn, oqpskTrn, bfskATrn, bfskBTrn, bfskR2Trn); 
 
 datTrnList = {ookTrn, bpskTrn, oqpskTrn, bfskATrn, bfskBTrn, bfskR2Trn};
 

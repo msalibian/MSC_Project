@@ -1,7 +1,7 @@
 
 clear
 
-addpath('code/Train')
+addpath('code/Train/fbTree')
 
 P = 50;
 
@@ -11,6 +11,9 @@ oqpskTrn = csvread(strcat('data/Modulation/oqpsk_P', num2str(P), '.csv'));
 bfskATrn = csvread(strcat('data/Modulation/bfskA_P', num2str(P), '.csv'));
 bfskBTrn = csvread(strcat('data/Modulation/bfskB_P', num2str(P), '.csv'));
 bfskR2Trn = csvread(strcat('data/Modulation/bfskR2_P', num2str(P), '.csv'));
+
+[ookTrn, bpskTrn, oqpskTrn, bfskATrn, bfskBTrn, bfskR2Trn] = whisker_fn(...
+	ookTrn, bpskTrn, oqpskTrn, bfskATrn, bfskBTrn, bfskR2Trn); 
 
 datTrnList = {ookTrn, bpskTrn, oqpskTrn, bfskATrn, bfskBTrn, bfskR2Trn};
 
