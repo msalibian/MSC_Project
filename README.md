@@ -42,6 +42,10 @@ Output:
 
 <img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
+#### Combine Modulation Data to get Training and Testing Data
+Instead of using the modulation data directly as in fitting the feature-based tree, we first combine the modulation data into separate training and testing data before fitting classification tree and random forest.
+
+
 
 
 
