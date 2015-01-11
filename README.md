@@ -77,7 +77,7 @@ Output:
   * cTree: ["data/Fitted/cTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/cTree")
   * rForest: ["data/Fitted/rForest"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/rForest")
 
-<img src="visualizations/flow--fbTree.png" width="450" height="300">
+<img src="visualizations/flow-fit-cTree-rForest.png" width="450" height="200">
 
 
 
