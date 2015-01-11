@@ -14,7 +14,7 @@ This guide is complementary to the paper (to be posted later).
 
 Big Picture:
 
-<img src="visualizations/flow-bigPicture.png" width="450" height="200">
+<img src="visualizations/flow-bigPicture.png" width="450" height="180">
 
 #### Simulating Modulation Data
 The code that performs the simulation is in ["code/Modulation"](https://github.com/kenlau177/MSC_Project/tree/master/code/Modulation).
@@ -28,7 +28,7 @@ There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to t
 <img src="visualizations/flow-simulating-mods.png" width="450" height="300">
 
 #### Fit Feature-Based Tree
-Run ["code/Train/fbTree/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree/mainFbTree.m) to fit the fbTree.
+Run ["code/Train/fbTree/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree/mainFbTree.m) to fit and test the fbTree.
 
 Depends on several functions. They can be found in: ["code/Train/fbTree"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree)
 
@@ -62,7 +62,7 @@ Output:
 <img src="visualizations/flow-combine-mod.png" width="450" height="300">
 
 #### Fit Classification Tree and Random Forest
-Based on the paper, we consider fitting the models under 2 analysis scenarios. In the first scenario, we use only features m1,...,m5. In the second scenario we use all the features. 
+We fit and test the cTree and rForest models. Based on the paper, we consider the models under 2 analysis scenarios. In the first scenario, we use only features m1,...,m5. In the second scenario we use all the features. 
 
 Run ["code/Train/main.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/main.R) to fit the cTree and rForest.
 
