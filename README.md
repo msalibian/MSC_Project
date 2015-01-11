@@ -4,7 +4,9 @@
 
 **Ken Lau**
 
-**Supervisors: Matías Salibián-Barrera and Lutz Lampe**
+**Supervisors:** 
+- **Matías Salibián-Barrera, Associate Professor of Statistics**
+- **Lutz Lampe, Professor of Electrical and Computer Engineering**
 
 **UBC**
 
