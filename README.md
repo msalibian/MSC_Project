@@ -28,9 +28,9 @@ There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to t
 <img src="visualizations/flow-simulating-mods.png" width="450" height="300">
 
 #### Fit Feature-Based Tree
-Run ["code/Train/fbTree/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/mainFbTree.m) to fit the fbTree.
+Run ["code/Train/fbTree/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree/mainFbTree.m) to fit the fbTree.
 
-Depends on several functions. They can be found in: ["code/Train/fbTree"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
+Depends on several functions. They can be found in: ["code/Train/fbTree"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/fbTree)
 
 Input: 
 - Raw modulation data directly from the output of the previous step.
@@ -45,7 +45,7 @@ Output:
 <img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
 #### Combine Modulation Data
-We combine the corresponding training data from each raw modulation data with P=50. The same is done for the testing data. We should end up with training data containing all modulations. Similarly for the testing data. The purpose of this step is to simplify the inputs before fitting the models.
+We combine the corresponding training data from each raw modulation data with P=50. The same is done for the testing data with P=200. We should end up with training data containing all modulations. Similarly for the testing data. The purpose of this step is to simplify the inputs before fitting the models.
 
 Essentially, we could have the combined training and testing data for fitting the fbTree. However, it is easier to use the raw modulation data in MATLAB. Therefore, the raw modulation data was used for the fbTree and the combined training/testing data was used for the cTree and rForest. 
 
@@ -61,7 +61,23 @@ Output:
 
 <img src="visualizations/flow-combine-mod.png" width="450" height="300">
 
+#### Fit Classification Tree and Random Forest
+Run ["code/Train/main.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/main.R) to fit the cTree and rForest.
 
+Depends on cTree.R, rForest.R, and procedure.R. They can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
+
+Input: 
+- combined training and testing data
+
+Output: 
+- A text file with the predicted versus true modulation type as a function of SNR.
+  * The first column corresponds to the SNR
+  * The second column is the true modulation type
+  * The third column is the predicted modulation type
+  * cTree: ["data/Fitted/cTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/cTree")
+  * rForest: ["data/Fitted/rForest"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/rForest")
+
+<img src="visualizations/flow--fbTree.png" width="450" height="300">
 
 
 
