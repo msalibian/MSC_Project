@@ -62,6 +62,8 @@ Output:
 <img src="visualizations/flow-combine-mod.png" width="450" height="300">
 
 #### Fit Classification Tree and Random Forest
+Based on the paper, we consider fitting the models under 2 analysis scenarios. In the first scenario, we use only features m1,...,m5. In the second scenario we use all the features. 
+
 Run ["code/Train/main.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/main.R) to fit the cTree and rForest.
 
 Depends on cTree.R, rForest.R, and procedure.R. They can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
@@ -70,7 +72,9 @@ Input:
 - combined training and testing data
 
 Output: 
-- A text file with the predicted versus true modulation type as a function of SNR.
+- Text files with the predicted versus true modulation type as a function of SNR.
+  * If the file extension contains 'k', then that means all features were used.
+  * Otherwise, if the file extension contains 'nok', then that means only m1,...,m5 were used.
   * The first column corresponds to the SNR
   * The second column is the true modulation type
   * The third column is the predicted modulation type
