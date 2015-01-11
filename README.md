@@ -96,7 +96,12 @@ Input:
  * Files can be found in ["data/Fitted"](https://github.com/kenlau177/MSC_Project/tree/master/data/Fitted)
 
 Output:
-- 
+- Predictive performance plots in 2 analysis scenarios:
+ * when m1,...,m5 are used
+ * when all features are used
 
+<img src="visualizations/pred-performance-nok.png" width="450" height="200"> 
  
- 
+<img src="visualizations/pred-performance-k.png" width="450" height="200"> 
+
+<img src="visualizations/flow-validate-performance.png" width="450" height="200">
