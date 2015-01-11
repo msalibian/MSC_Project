@@ -43,7 +43,11 @@ Output:
 <img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
 #### Combine Modulation Data to get Training and Testing Data
-Instead of using the modulation data directly as in fitting the feature-based tree, we first combine the modulation data into separate training and testing data before fitting classification tree and random forest.
+Instead of using the raw modulation data as in fitting the feature-based tree, we first combine the modulation data into separate training and testing data before fitting classification tree and random forest.
+
+Essentially, we could have used the training and testing data for fitting the feature-based tree. However, it is easier to use the raw modulation data in MATLAB. Therefore, we do not use the training and testing data for fitting the feature-based tree.
+
+
 
 
 
