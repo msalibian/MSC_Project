@@ -59,7 +59,7 @@ Output:
  * ["data/datTrn.txt"](https://github.com/kenlau177/MSC_Project/blob/master/data/datTrn.txt)
  * ["data/datTest.txt"](https://github.com/kenlau177/MSC_Project/blob/master/data/datTest.txt)
 
-
+<img src="visualizations/flow-combine-mod.png" width="450" height="300">
 
 
 
