@@ -40,11 +40,10 @@ Input:
 - Raw modulation data directly from the output of the previous step.
 
 Output: 
-- A text file with the predicted versus true modulation type as a function of SNR.
+- A text file ["data/Fitted/fbTree/fbTree.txt"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree") with the predicted versus true modulation type as a function of SNR.
   * The first column corresponds to the SNR
   * The second column is the true modulation type
   * The third column is the predicted modulation type
-  * Stored in ["data/Fitted/fbTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/fbTree")
 
 <img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
