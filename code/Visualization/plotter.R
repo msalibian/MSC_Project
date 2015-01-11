@@ -113,7 +113,7 @@ plotter.plot = function(ggdata){
         labs(aesthetic="Models")
   
   k = unique(ggdata$k)
-  outf = paste0("visualizations//pred-performance-", k, ".pdf")
+  outf = paste0("visualizations//pred-performance-", k, ".png")
   ggsave(outf, gg, width=8, height=6)
   
 }
