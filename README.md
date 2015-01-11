@@ -5,10 +5,12 @@
 **Ken Lau**
 
 **Supervisors:** 
-- **Matías Salibián-Barrera, Associate Professor of Statistics**
-- **Lutz Lampe, Professor of Electrical and Computer Engineering**
+- Matías Salibián-Barrera, Associate Professor of Statistics
+- Lutz Lampe, Professor of Electrical and Computer Engineering
 
 **UBC**
+
+**Department of Statistics**
 
 This README file guides us through the workflow of our study. The workflow consists of 3 major components. First, modulation data is generated through MATLAB to obtain training and testing data. Second, models are fitted on the training data, and then predicted with the testing data. The models include feature-based tree (fbTree), classification tree (cTree) and random forest (rForest). Finally, predicitive performance is validated for each model.
 
