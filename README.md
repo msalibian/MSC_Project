@@ -81,8 +81,8 @@ Output:
   * The first column corresponds to the SNR
   * The second column is the true modulation type
   * The third column is the predicted modulation type
-  * cTree: ["data/Fitted/cTree"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/cTree")
-  * rForest: ["data/Fitted/rForest"]("https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/rForest")
+  * cTree: ["data/Fitted/cTree"](https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/cTree)
+  * rForest: ["data/Fitted/rForest"](https://github.com/kenlau177/MSC_Project/blob/master/data/Fitted/rForest)
 
 <img src="visualizations/flow-fit-cTree-rForest.png" width="450" height="200">
 
