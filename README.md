@@ -73,8 +73,8 @@ Input:
 
 Output: 
 - Text files with the predicted versus true modulation type as a function of SNR.
-  * If the file extension contains 'k', then that means all features were used.
-  * Otherwise, if the file extension contains 'nok', then that means only m1,...,m5 were used.
+  * If the file name contains 'k', then that means all features were used.
+  * Otherwise, if the file name contains 'nok', then that means only m1,...,m5 were used.
   * The first column corresponds to the SNR
   * The second column is the true modulation type
   * The third column is the predicted modulation type
@@ -83,6 +83,6 @@ Output:
 
 <img src="visualizations/flow-fit-cTree-rForest.png" width="450" height="200">
 
-
+#### Validating Predictive Performance
 
 
