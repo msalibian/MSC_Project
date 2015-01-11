@@ -20,7 +20,7 @@ procedure = function(k, model, datTrn, datTest){
 		outf = paste0(outf, "rForest//rForest_", k, ".txt")
 	}
 	
-	write.table(resDf, outf, sep=",")
+	write.table(resDf, outf, sep=",", row.names=F, col.names=T)
 	
 }
 
