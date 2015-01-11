@@ -13,6 +13,7 @@ This README file guides us through the workflow of our study. The workflow consi
 This guide is complementary to the paper (to be posted later). 
 
 Big Picture:
+
 <img src="visualizations/flow-bigPicture.png" width="450" height="200">
 
 #### Simulating Modulation Data
@@ -44,15 +45,19 @@ Output:
 <img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
 #### Combine Modulation Data
-We combine the modulation data into training and testing data before fitting classification tree and random forest. As a result, the training and testing data contain the raw modulation data.
+We combine the corresponding training data from each raw modulation data with P=50. The same is done for the testing data. We should end up with training data containing all modulations. Similarly for the testing data. The purpose of this step is to simplify the inputs before fitting the models.
 
-Essentially, we could have used the training and testing data for fitting the fbTree. However, it is easier to use the raw modulation data in MATLAB. Therefore, the raw modulation data was used for the fbTree and the training/testing data was used for the cTree and rForest. 
+Essentially, we could have the combined training and testing data for fitting the fbTree. However, it is easier to use the raw modulation data in MATLAB. Therefore, the raw modulation data was used for the fbTree and the combined training/testing data was used for the cTree and rForest. 
 
 Run ["code/Train/parseModData.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/parseModData.R) to combine the raw modulation data.
 
 Input:
-- 
+- raw modulation data based on the output from Section on Simulating Modulation Data
 
+Output:
+- combined training and testing data
+ * ["data/datTrn.txt"](https://github.com/kenlau177/MSC_Project/blob/master/data/datTrn.txt)
+ * ["data/datTest.txt"](https://github.com/kenlau177/MSC_Project/blob/master/data/datTest.txt)
 
 
 
