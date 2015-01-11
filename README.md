@@ -8,10 +8,11 @@
 
 **UBC**
 
-This README file guides us through the workflow of our study. The workflow consists of 3 major components. First, modulation data is generated through MATLAB. Then, feature-based tree is implemented in MATLAB. While, classification tree and random forest are implemented in R. Finally, predicitive performance is verified for each model.
+This README file guides us through the workflow of our study. The workflow consists of 3 major components. First, modulation data is generated through MATLAB. Then, feature-based tree (fbTree) is implemented in MATLAB. While, classification tree (cTree) and random forest (rForest) are implemented in R. Finally, predicitive performance is verified for each model.
 
 This guide is complementary to the paper (to be posted later). 
 
+Big Picture:
 <img src="visualizations/flow-bigPicture.png" width="450" height="200">
 
 #### Simulating Modulation Data
@@ -26,12 +27,12 @@ There are 6 modulation types: ook, bpsk, oqpsk, bfksA, bfskB, bfskR2. Refer to t
 <img src="visualizations/flow-simulating-mods.png" width="450" height="300">
 
 #### Fit Feature-Based Tree
-Run ["code/Train/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/mainFbTree.m) to fit the feature-based tree.
+Run ["code/Train/fbTree/mainFbTree.m"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/mainFbTree.m) to fit the fbTree.
 
-Depends on fbTree.m, aggregate.m, calculateThreshold.m, and predFbTree.m. Can be found in: ["code/Train"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
+Depends on several functions. They can be found in: ["code/Train/fbTree"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train)
 
 Input: 
-- Training and testing modulation data directly from the output of the previous step.
+- Raw modulation data directly from the output of the previous step.
 
 Output: 
 - A text file with the predicted versus true modulation type as a function of SNR.
@@ -42,10 +43,15 @@ Output:
 
 <img src="visualizations/flow-fit-fbTree.png" width="450" height="300">
 
-#### Combine Modulation Data to get Training and Testing Data
-Instead of using the raw modulation data as in fitting the feature-based tree, we first combine the modulation data into separate training and testing data before fitting classification tree and random forest.
+#### Combine Modulation Data
+We combine the modulation data into training and testing data before fitting classification tree and random forest. As a result, the training and testing data contain the raw modulation data.
 
-Essentially, we could have used the training and testing data for fitting the feature-based tree. However, it is easier to use the raw modulation data in MATLAB. Therefore, we do not use the training and testing data for fitting the feature-based tree.
+Essentially, we could have used the training and testing data for fitting the fbTree. However, it is easier to use the raw modulation data in MATLAB. Therefore, the raw modulation data was used for the fbTree and the training/testing data was used for the cTree and rForest. 
+
+Run ["code/Train/parseModData.R"](https://github.com/kenlau177/MSC_Project/blob/master/code/Train/parseModData.R) to combine the raw modulation data.
+
+Input:
+- 
 
 
 
