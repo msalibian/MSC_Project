@@ -16,6 +16,8 @@ This README file guides us through the workflow of our study. The workflow consi
 
 This README is complementary to the paper (to be posted later). 
 
+In all the following diagrams in this file, blue color encoding represents data, and orange color encoding represents action/script.
+
 Big Picture:
 
 <img src="visualizations/flow-bigPicture.png" width="450" height="160">
