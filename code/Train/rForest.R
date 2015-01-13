@@ -11,7 +11,7 @@ rForest.predSel = function(datTrn, namesFeatures, params){
 	# uses min leaf node size of 10
 	# this speeds up computation, while keeping the difference negligible 
 	#  since we are only interested in feature selection at this step
-	fit = randomForest(fm, datTrn, nTree=500, keep.forest=F, nodesize=10)
+	fit = randomForest(fm, datTrn, nTree=400, keep.forest=F, nodesize=10)
 	importanceDf = data.frame(fit$importance)
 	importanceDf = importanceDf[order(importanceDf$MeanDecreaseGini,
 																		decreasing=T),,drop=F]
@@ -47,13 +47,12 @@ rForest.modelProcess = function(datTrn, datTest, namesFeatures){
 	
 	params = list()
 	params$ntree = 850
-	# proportion of features to select for the feature selection step
-	if(length(namesFeatures) > 30){
-		params$pSel = .4
+	if(length(namesFeatures) < 10){
+    params$pSel = 1
 	} else {
-		params$pSel = 1
+    params$pSel = .4
 	}
-	namesFeatures = rForest.predSel(datTrn, namesFeatures, params)
+  namesFeatures = rForest.predSel(datTrn, namesFeatures, params)
 	fit = rForest.fitTrain(datTrn, datTest, namesFeatures, params)
 	pr = rForest.predTest(datTest, fit=fit)
 	resDf = cbind(datTest[,c("snrdB","cl")], pr)

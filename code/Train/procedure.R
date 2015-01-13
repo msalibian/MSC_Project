@@ -11,7 +11,7 @@ procedure = function(k, model, datTrn, datTest){
 		namesFeatures = c("m1", "m2", "m3", "m4", "m5")
 	}
 	
-	outf = "data//Fitted"
+	outf = "data//Fitted//"
 	if(model == "cTree"){
 		resDf = cTree.modelProcess(datTrn, datTest, namesFeatures)
 		outf = paste0(outf, "cTree//cTree_", k, ".txt")

@@ -19,11 +19,21 @@ datTest$cl = factor(datTest$cl)
 
 # we let 'k' resemble all features included
 # 'nok' resembles only features m1,...,m5
+system.time(
 procedure(k="nok", model="cTree", datTrn=datTrn, datTest=datTest)
-procedure(k="nok", model="rForest", datTrn=datTrn, datTest=datTest)
-procedure(k="k", model="cTree", datTrn=datTrn, datTest=datTest)
-procedure(k="k", model="rForest", datTrn=datTrn, datTest=datTest)
+)
 
+system.time(
+procedure(k="nok", model="rForest", datTrn=datTrn, datTest=datTest)
+)
+
+system.time(
+procedure(k="k", model="cTree", datTrn=datTrn, datTest=datTest)
+)
+
+system.time(
+  procedure(k="k", model="rForest", datTrn=datTrn, datTest=datTest)
+)
 
 
 
