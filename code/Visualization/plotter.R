@@ -17,19 +17,6 @@ plotter.readFile = function(xCombnDf){
 
 }
 
-# plotter.findFiles = function(models){
-#   
-#   inf = "data//Fitted"
-#   files = lapply(models, FUN=function(x, inf){
-#             out = list.files(paste(inf, x, sep="//"), x, 
-#                     full.names=T, ignore.case=T)
-#             return(out)
-#           }, inf=inf)
-#   files = unlist(files)
-#   return(files)
-#   
-# }
-
 plotter.aggregate = function(resDf){
   
   out = ddply(resDf, .(snrdB), .fun=summarize, "sr"=mean(res))
@@ -88,7 +75,7 @@ plotter.parseLegend = function(ggdata){
 plotter.plot = function(ggdata){
   
   ggdata = plotter.parseLegend(ggdata)
-  titleStr = plotter.parseTitle(ggdata)
+# titleStr = plotter.parseTitle(ggdata)
   xBreaks = seq(min(ggdata$snrdB), max(ggdata$snrdB), by=5)
   yBreaks = seq(.1, 1, by=.1)
   colours1 = brewer.pal(n=9, "Blues")[9]
@@ -99,9 +86,8 @@ plotter.plot = function(ggdata){
         color=reorder(processCombn, desc(sr), mean))) + 
         geom_line(size=1.3) + xlab("SNR (dB)") + 
         ylab("Success Rate") + 
-        theme(axis.title=element_text(size=13), 
-          axis.text=element_text(size=15), title=element_text(size=17),
-          axis.title=element_text(size=17),
+        theme(axis.title=element_text(size=17), 
+          axis.text=element_text(size=16), title=element_text(size=17),
           legend.text=element_text(size=16), 
           legend.title=element_text(size=16), 
           legend.position=c(.8, .15)) + 
@@ -109,7 +95,6 @@ plotter.plot = function(ggdata){
         scale_linetype_manual(name="Models", values=c(1,2,3)) +
         scale_x_continuous(breaks=xBreaks) + 
         scale_y_continuous(breaks=yBreaks) + 
-        ggtitle(titleStr) + 
         labs(aesthetic="Models")
   
   k = unique(ggdata$k)
