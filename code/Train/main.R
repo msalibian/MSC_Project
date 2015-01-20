@@ -31,6 +31,7 @@ system.time(
 procedure(k="k", model="cTree", datTrn=datTrn, datTest=datTest)
 )
 
+fImp = 
 system.time(
   procedure(k="k", model="rForest", datTrn=datTrn, datTest=datTest)
 )

@@ -9,15 +9,40 @@ rForest.predSel = function(datTrn, namesFeatures, params){
 	}
 	# uses 500 trees instead of 850
 	# uses min leaf node size of 10
-	# this speeds up computation, while keeping the difference negligible 
+	# this speeds up computation, while the difference negligible 
 	#  since we are only interested in feature selection at this step
 	fit = randomForest(fm, datTrn, nTree=400, keep.forest=F, nodesize=10)
-	importanceDf = data.frame(fit$importance)
+	
+	if(length(namesFeatures) > 10){
+    ggImp = rForest.plotImportance(fit)
+    ggsave("visualizations//importance2.pdf", ggImp, width=8, height=8)
+	}
+    
+  importanceDf = data.frame(fit$importance)
 	importanceDf = importanceDf[order(importanceDf$MeanDecreaseGini,
 																		decreasing=T),,drop=F]
 	out = row.names(importanceDf)[1:round(nrow(importanceDf)*(params$pSel))]
 	return(out)
 	
+}
+
+rForest.plotImportance = function(fit){
+  importanceMtx = fit$importance
+  importanceDf = data.frame("feature"=row.names(importanceMtx),
+                            "importance"=c(importanceMtx))
+  importanceDf = importanceDf[order(importanceDf$importance, decreasing=T),]
+  n = round(.4*nrow(importanceDf))
+  #importanceDf = importanceDf[1:(n+5),]
+  importanceDf$threshold = factor(c(rep("top_40",n), rep("bottom_60",nrow(importanceDf)-n)))
+  xBreaks = importanceDf$feature
+  xBreaks = as.character(xBreaks[seq(1,length(xBreaks),by=4)])
+  gg = ggplot(importanceDf, aes(y=importance, x=reorder(feature,importance))) +
+    coord_flip() +
+    geom_point(size=3, aes(color=threshold)) + xlab("Features") +
+    ylab("Importance") +
+    ggtitle("Variable Importance") + 
+    scale_x_discrete(breaks=xBreaks)
+  return(gg)
 }
 
 rForest.fitTrain = function(datTrn, datTest, namesFeatures, params){
