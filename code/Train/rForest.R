@@ -28,6 +28,8 @@ rForest.predSel = function(datTrn, namesFeatures, params){
 
 rForest.plotImportance = function(fit){
   importanceMtx = fit$importance
+  # change Xk name to Rk
+  row.names(importanceMtx) = gsub("^Xk", "Rk", row.names(importanceMtx))
   importanceDf = data.frame("feature"=row.names(importanceMtx),
                             "importance"=c(importanceMtx))
   importanceDf = importanceDf[order(importanceDf$importance, decreasing=T),]
@@ -38,10 +40,17 @@ rForest.plotImportance = function(fit){
   xBreaks = as.character(xBreaks[seq(1,length(xBreaks),by=4)])
   gg = ggplot(importanceDf, aes(y=importance, x=reorder(feature,importance))) +
     coord_flip() +
-    geom_point(size=3, aes(color=threshold)) + xlab("Features") +
+    geom_point(size=3, aes(color=threshold)) + 
+    xlab("Features") +
     ylab("Importance") +
-    ggtitle("Variable Importance") + 
-    scale_x_discrete(breaks=xBreaks)
+    scale_x_discrete(breaks=xBreaks) + 
+    scale_color_discrete(name="Threshold", 
+      breaks=c("top_40","bottom_60"),labels=c("Top 40%","Bottom 60%")) +  
+    theme(axis.title=element_text(size=17), 
+      legend.text=element_text(size=14), 
+      legend.title=element_text(size=14), 
+      legend.position=c(.9, .4))
+  
   return(gg)
 }
 
@@ -68,21 +77,60 @@ rForest.predTest = function(datTest, fit){
 
 }
 
-rForest.modelProcess = function(datTrn, datTest, namesFeatures){
+rForest.modelProcess = function(datTrn, datTest, namesFeatures, pSel=NULL){
 	
 	params = list()
 	params$ntree = 850
-	if(length(namesFeatures) < 10){
-    params$pSel = 1
-	} else {
-    params$pSel = .4
+  params$pSel = pSel
+	if(is.null(params$pSel)){  
+    if(length(namesFeatures) < 10){
+      params$pSel = 1
+	  } else {
+      params$pSel = .4
+	  }
 	}
   namesFeatures = rForest.predSel(datTrn, namesFeatures, params)
-	fit = rForest.fitTrain(datTrn, datTest, namesFeatures, params)
+	# namesFeatures = namesFeatures[1:20]
+  fit = rForest.fitTrain(datTrn, datTest, namesFeatures, params)
 	pr = rForest.predTest(datTest, fit=fit)
 	resDf = cbind(datTest[,c("snrdB","cl")], pr)
 	return(resDf)
 	
+}
+
+# CV on variable importance to determine the number of features to select 
+rForest.cvOptSel = function(datTrn, namesFeatures){
+
+  require(cvTools)
+  pSels = c(.4, .5, .6, .7)
+  # pSels = c(.145, 1)
+  K = 10
+  R = 3
+  outCvFolds = cvFolds(nrow(datTrn), K=K, R=R)
+  cvFoldsAll = data.frame(outCvFolds$subset)
+  cvFoldsAll$fold = outCvFolds$which
+  
+  srP = c()
+  for(p in 1:length(pSels)){
+    pSel = pSels[p]
+    srR = c()
+    for(r in 1:R){
+      cvfolds = cvFoldsAll[,c(r,R+1)]
+      srs = c()
+      for(f in 1:K){
+        idxTestFold = subset(cvfolds, fold==f)[,1]
+        datTestFold = datTrn[idxTestFold,]  
+        datTrnFold = datTrn[!(1:nrow(datTrn))%in%idxTestFold,]
+        resDf = rForest.modelProcess(datTrnFold, datTestFold, namesFeatures, pSel)
+        srs[f] = mean(resDf$cl == resDf$pr) 
+      }
+      srR[r] = mean(srs)
+    }
+    srP[p] = mean(srR)
+  }
+  out = data.frame(pSel=pSels, sr=srP)
+  write.table(out, "cv-on-featSel.txt", sep=",", row.names=F, col.names=T)
+  
 }
 
 
