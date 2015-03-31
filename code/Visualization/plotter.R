@@ -78,10 +78,11 @@ plotter.plot = function(ggdata){
 # titleStr = plotter.parseTitle(ggdata)
   xBreaks = seq(min(ggdata$snrdB), max(ggdata$snrdB), by=5)
   yBreaks = seq(.1, 1, by=.1)
-  colours1 = brewer.pal(n=9, "Blues")[9]
-  colours1 = c(colours1, brewer.pal(n=9, "Greens")[6])
-  colours1 = c(colours1, brewer.pal(n=9, "Oranges")[5])
-  gg = ggplot(ggdata, aes(x=snrdB, y=sr, 
+	colours1 = brewer.pal(n=9, "Greys")[9]
+	#colours1 = c(colours1, brewer.pal(n=9, "Blues")[8])
+	colours1 = c(colours1, brewer.pal(n=9, "Greens")[7])
+  colours1 = c(colours1, brewer.pal(n=9, "Oranges")[4])
+	gg = ggplot(ggdata, aes(x=snrdB, y=sr, 
           linetype=reorder(processCombn, desc(sr), mean), 
         color=reorder(processCombn, desc(sr), mean))) + 
         geom_line(size=1.3) + xlab("SNR (dB)") + 
@@ -92,7 +93,7 @@ plotter.plot = function(ggdata){
           legend.title=element_text(size=16), 
           legend.position=c(.8, .15)) + 
         scale_color_manual(name="Models", values=colours1) +
-        scale_linetype_manual(name="Models", values=c(1,2,3)) +
+        scale_linetype_manual(name="Models", values=c(1,3,4)) +
         scale_x_continuous(breaks=xBreaks) + 
         scale_y_continuous(breaks=yBreaks) + 
         labs(aesthetic="Models")
