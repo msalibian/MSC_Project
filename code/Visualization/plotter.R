@@ -81,7 +81,7 @@ plotter.plot = function(ggdata){
 	colours1 = brewer.pal(n=9, "Greys")[9]
 	#colours1 = c(colours1, brewer.pal(n=9, "Blues")[8])
 	colours1 = c(colours1, brewer.pal(n=9, "Greens")[7])
-  colours1 = c(colours1, brewer.pal(n=9, "Oranges")[4])
+  colours1 = c(colours1, brewer.pal(n=9, "Oranges")[3])
 	gg = ggplot(ggdata, aes(x=snrdB, y=sr, 
           linetype=reorder(processCombn, desc(sr), mean), 
         color=reorder(processCombn, desc(sr), mean))) + 
@@ -89,10 +89,11 @@ plotter.plot = function(ggdata){
         ylab("Success Rate") + 
         theme(axis.title=element_text(size=17), 
           axis.text=element_text(size=16), title=element_text(size=17),
-          legend.text=element_text(size=16), 
-          legend.title=element_text(size=16), 
-          legend.position=c(.8, .15)) + 
-        scale_color_manual(name="Models", values=colours1) +
+          legend.text=element_text(size=15), 
+          legend.title=element_text(size=13), 
+          legend.position=c(.78, .175), 
+          legend.key.width=unit(1.7, "cm")) + 
+        scale_color_manual("Models", values=colours1) +
         scale_linetype_manual(name="Models", values=c(1,3,4)) +
         scale_x_continuous(breaks=xBreaks) + 
         scale_y_continuous(breaks=yBreaks) + 
