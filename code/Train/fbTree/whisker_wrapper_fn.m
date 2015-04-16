@@ -1,6 +1,18 @@
-
+% Outlier removal function refactored to remove outliers from corresponding
+% training data sets and features.
+% Calls the outlier_filter function.
 % p corresponds to the column of the data
-%  p=2 is m1, p=3 is m2, and so on
+% p=2 is m1, p=3 is m2, and so on
+%
+% Parameters
+% ----------
+% dat : training data
+% p : position in columns of dat of selected feature to filter
+%
+% Returns
+% -------
+% out : training data
+%
 function out = whisker_wrapper_fn(dat, p)
 
 	snrdB_vec = unique(dat(:,1));

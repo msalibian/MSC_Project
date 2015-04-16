@@ -1,4 +1,17 @@
-
+% Prediction function of FBT using the thresholds computed through 
+% the worst-case analyses.
+% The function iterates through each testing tuple and makes a 
+% prediction by comparing the feature values with the thresholds.
+% 
+% Parameters
+% ----------
+% newdata : testing data
+% thresholds : thresholds computed using fbTree function
+%
+% Returns
+% -------
+% cl_vec : array of class predictions
+%
 function cl_vec = predict_kuba_fn(newdata, thresholds)
 	threshold1 = thresholds(1);
 	threshold2 = thresholds(2);

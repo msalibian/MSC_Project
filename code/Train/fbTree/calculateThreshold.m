@@ -1,13 +1,26 @@
-
-% performs worst-case analysis for each of m1,...,m5
-% Xmin corresponds to the modulation data to be treated as min
-%  for the worst-case analysis.
-% Xmax is similar except the modulation to be treated as max
-% p is the column of the data which corresponds to one of m1,...,m5
-%  eg. p=2 => m1 since the first column corresponds to SNR
-% init is the initial value utilized in finding the intersection
+% Computation of threshold between two modulations for a feature. The 
+% threshold is chosen as the intersection of the two lines specified by 
+% Xmin and Xmax. 
+% The intersection is found by fitting a piece-wise linear interpolation 
+% to Xmin and Xmax, and then finding the intersection of the two lines 
+% by taking the difference and finding the root. 
+%
+% Parameters
+% ----------
+% Xmin : the modulation data specified to be used as the min line.
+% Xmax : the modulation data specified to be used as the max line.
+% p : position in columns of the data representing the feature. p=2
+% corresponds to m1.
+% init : starting position used to find the intersection.
+%
+% Returns
+% -------
+% threshold : value of the intersection.
+% pp_min : piece-wise linear interpolation fit for Xmin.
+% pp_max : piece-wise linear interpolation fit for Xmax.
+%
 function [threshold, pp_min, pp_max] = calculateThreshold(Xmin, Xmax, p, init)
-
+    
 	[Xmin_snrdB Xmin_m] = aggregate(Xmin(:,1), Xmin(:,p), @(x) min(x));
 	Xmin_m = cell2mat(Xmin_m);
 	Xmin1 = [Xmin_snrdB Xmin_m];

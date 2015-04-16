@@ -14,9 +14,9 @@ N = 512;
 
 % Number of observations per modulation and SNR.
 % Change variable P to simulate for either training, validation, or testing data.
-P = 50; % for train data
+%P = 50; % for train data
 %P = 60; % for validation data 
-%P = 200; % for test data
+P = 200; % for test data
 
 % Choose a range of signal-to-noise ratio.
 snrdB_vec = -25:1:13;

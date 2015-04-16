@@ -1,6 +1,16 @@
+# Plotting class which contains methods that plots out figures 2 and 3 of 
+# the manuscript. In particular, the plotter.process function performs the 
+# plotting given the parameters in mainPlotter.R
 
+# Reads an indivdual row of the input parameters specified in mainPlotter.R
+# and reads in the corresponding files of resDf at the relative path given 
+# by the model name and k variables. The resDf files contain the SNR, 
+# true labels, and predicted labels as mentioned in fbTree.m, cTree.R, and 
+# rForest.R.
+# Concatenate a new column to each resDf data which indicates whether 
+# the prediction is correct or not.
+# 
 plotter.readFile = function(xCombnDf){
-
   model = xCombnDf$model
   inf = paste0("data//Fitted//", model)
   k = xCombnDf$k
@@ -14,32 +24,37 @@ plotter.readFile = function(xCombnDf){
   names(resDf) = c("snrdB", "cl", "pr")
   resDf$res = (resDf$cl == resDf$pr)
   return(resDf)
-
 }
 
+# Reads in the resDf with the new columns indicating whether predictions 
+# are correct. 
+# Group resDf by SNR and compute the success rate. 
+#
 plotter.aggregate = function(resDf){
-  
   out = ddply(resDf, .(snrdB), .fun=summarize, "sr"=mean(res))
   return(out)
-
 }
 
+# Computes the success rate of a single combination of model and k 
+# variables by calling the functions plotter.readFile and plotter.aggregate.
+#
 plotter.summarize = function(xCombnDf){
-  
   resDf = plotter.readFile(xCombnDf)
   resDfType = plotter.aggregate(resDf)
   # set row names to NULL, this allows to combine with another dataframe
   row.names(xCombnDf) = NULL
   out = data.frame(xCombnDf, resDfType)
   return(out)
-  
 }
 
+# Iterates through all combinations of model and k input parameters specified 
+# in the input of plotter.process and calls the function plotter.summarize 
+# to compute the success rates of each combination of model and 
+# features included.
+#
 plotter.generateSummaries = function(combnDf){
-  
   out = ddply(combnDf, .(model, k), .fun=plotter.summarize)
   return(out)
-  
 }
 
 plotter.generatePlots = function(combnDf, resDfType){
@@ -67,7 +82,8 @@ plotter.parseLegend = function(ggdata){
   out$processCombn = out$model
   hashTable = c("rForest"="Random Forest", 
                 "cTree"="Classification Tree", 
-                "fbTree"="Feature-Based Tree")
+                "fbTree"="Feature-Based Tree",
+                "ctApproxRf"="CT-Approx RF")
   out$processCombn = revalue(out$processCombn, hashTable)
   return(out)
 }
@@ -75,13 +91,21 @@ plotter.parseLegend = function(ggdata){
 plotter.plot = function(ggdata){
   
   ggdata = plotter.parseLegend(ggdata)
-# titleStr = plotter.parseTitle(ggdata)
+  if(length(unique(ggdata$model)) == 3){
+    colours1 = brewer.pal(n=9, "Greys")[9]
+    colours1 = c(colours1, brewer.pal(n=9, "Greens")[7])
+    colours1 = c(colours1, brewer.pal(n=9, "Oranges")[5])
+    lineValues = c(1,3,6)
+  } else {
+    colours1 = brewer.pal(n=9, "Greys")[9]
+    colours1 = c(colours1, brewer.pal(n=9, "Blues")[8])
+    colours1 = c(colours1, brewer.pal(n=9, "Greens")[6])
+    colours1 = c(colours1, brewer.pal(n=9, "Oranges")[3])
+    lineValues = c(1,2,3,6)
+  }
+  
   xBreaks = seq(min(ggdata$snrdB), max(ggdata$snrdB), by=5)
   yBreaks = seq(.1, 1, by=.1)
-	colours1 = brewer.pal(n=9, "Greys")[9]
-	#colours1 = c(colours1, brewer.pal(n=9, "Blues")[8])
-	colours1 = c(colours1, brewer.pal(n=9, "Greens")[7])
-  colours1 = c(colours1, brewer.pal(n=9, "Oranges")[3])
 	gg = ggplot(ggdata, aes(x=snrdB, y=sr, 
           linetype=reorder(processCombn, desc(sr), mean), 
         color=reorder(processCombn, desc(sr), mean))) + 
@@ -93,11 +117,11 @@ plotter.plot = function(ggdata){
           legend.title=element_text(size=13), 
           legend.position=c(.78, .175), 
           legend.key.width=unit(1.7, "cm")) + 
-        scale_color_manual("Models", values=colours1) +
-        scale_linetype_manual(name="Models", values=c(1,3,4)) +
+        scale_color_manual("Classifiers", values=colours1) +
+        scale_linetype_manual(name="Classifiers", values=lineValues) +
         scale_x_continuous(breaks=xBreaks) + 
         scale_y_continuous(breaks=yBreaks) + 
-        labs(aesthetic="Models")
+        labs(aesthetic="Classifiers")
   
   k = unique(ggdata$k)
   outf = paste0("visualizations//pred-performance-", k, ".pdf")
