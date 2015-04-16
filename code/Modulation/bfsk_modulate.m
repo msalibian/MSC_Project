@@ -1,4 +1,23 @@
-
+% Simulation of signal corresponding to the BFSK-A, BFSK-B, and BFSK-R2 
+% modulation formats.
+%
+% Parameters
+% ----------
+% n : length of input symbols
+% fs : sampling frequency
+% Rs : symbol rate
+% fd : frequency separation
+% sps : samples per symbol
+% fif : intermediate frequency
+% enc : type of encoding: Manchester or 3 of 6 encoding
+% sd : sigma paramter for AWGN
+%
+% Returns
+% -------
+% xn_noise_if : received signal
+% sigpow : normalized signal power
+% nn : AWGN
+%
 function [xn_noise_if, sigpow, nn] = bfskA_modulate(n, fs, Rs, fd, sps, fif, enc, sd)
 	%enc is an encoding option which should be specified
 	%as either 'Manchester' or '3of6' strings

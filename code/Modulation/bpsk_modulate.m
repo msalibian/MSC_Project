@@ -1,3 +1,21 @@
+% Simulation of signal corresponding to the BPSK modulation format.
+%
+% Parameters
+% ----------
+% n : length of input symbols
+% fs : sampling frequency
+% sps : samples per symbol
+% fif : intermediate frequency
+% dsss : spreading factor
+% sd : sigma paramter for AWGN
+% norm_factor : normalization factor
+%
+% Returns
+% -------
+% xn_noise_if : received signal
+% sigpow : normalized signal power
+% nn : AWGN
+%
 function [xn_noise_if, sigpow, nn] = bpsk_modulate(n, fs, sps, fif, dsss, sd, norm_factor)
 	%symbol to chip mapping in IEEE 802.15.4
 	pn(:,1) = [1 1 1 1 0 1 0 1 1 0 0 1 0 0 0]';
@@ -41,14 +59,13 @@ function [xn_noise_if, sigpow, nn] = bpsk_modulate(n, fs, sps, fif, dsss, sd, no
 	
 	xn_if = real(xn_if_cmpx);
 	
+    sigpow = mean(xn_if.^2);
+    
 	%generate noise sequence
 	nn = sd*randn(length(xn_if),1);
 	
 	%add noise to received signal
 	xn_noise_if = xn_if + nn;
-	%calculate signal power for this sample
-	%sigpow = mean(xn_if.^2);
-	sigpow = mean((imag(xn_if_cmpx)).^2);
 		
 end
 	

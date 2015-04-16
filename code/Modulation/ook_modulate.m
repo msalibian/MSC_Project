@@ -1,5 +1,20 @@
-% function for modulation of ook
-% n - length of bit sequence
+% Simulation of signal corresponding to the OOK modulation format.
+%
+% Parameters
+% ----------
+% n : length of input symbols
+% fs : sampling frequency
+% sps : samples per symbol
+% fif : intermediate frequency
+% sd : sigma paramter for AWGN
+% norm_factor : normalization factor
+% 
+% Returns
+% -------
+% xn_noise_if : received signal
+% sigpow : normalized signal power
+% nn : AWGN
+%
 function [xn_noise_if, sigpow, nn] = ook_modulate(n, fs, sps, fif, sd, norm_factor)
 	% random binary sequence
 	data = randi([0 1], n, 1);
@@ -10,7 +25,7 @@ function [xn_noise_if, sigpow, nn] = ook_modulate(n, fs, sps, fif, sd, norm_fact
 	t = 0:1/fs:(length(xn)/fs-1/fs);
 	% transpose time sequence to obtain column vector
 	t = t';
-	
+    
 	u = rand(1);
 	
     % complex signal
@@ -18,12 +33,12 @@ function [xn_noise_if, sigpow, nn] = ook_modulate(n, fs, sps, fif, sd, norm_fact
 
 	xn_if = real(xn_if_cmpx);
 	
-	% generate sequence of noise
+    sigpow = mean(xn_if.^2);
+    
+	% generate AWGN
 	nn = sd*randn(length(xn_if),1);
-	% add noise to transmitted signal
+	% add noise to signal to obtain received signal
 	xn_noise_if = xn_if + nn;
-	% calculate signal power for this sample
-	sigpow = mean((imag(xn_if_cmpx)).^2);
     
 end
 	

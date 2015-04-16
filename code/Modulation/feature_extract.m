@@ -1,32 +1,18 @@
-
-function out = feature_extract(xn, k1, k2, B1, B2, nn)
+% Feature extraction of received signal xn.
+%
+% Parameters
+% ----------
+% xn : received signal
+% k1, k2 : frequency indexes
+% B1, B2 : parameters used for obtaining m3 and m4 features
+%
+% Returns
+% -------
+% out : array of feature variables for one observation
+%
+function out = feature_extract(xn, k1, k2, B1, B2)
 	N = length(xn);
-	
-	if exist('nn', 'var')
-		% standard deviation of noise
-        sd_nn = std(nn);
-		% small amount of noise to add to noise power estimate
-        ep_nn = .05*sd_nn*randn(length(nn),1);
-		% We are required to estimate the power of the noise 
-        %  in real-time. However, for our simulations, we 
-        %  add some error as a proxy to the 
-        %  estimation error in estimating the noise in real-time.
-        s2_n = (1/N)*sum((nn+ep_nn).^2);
-		% energy
-        e = (1/N)*sum(xn.^2);
-		% energy normalized by variance
-        enull = e/s2_n;
-		% snr estimate (included as feature)
-        snrdB_hat = 10*log10((e-s2_n)/s2_n);
-		%if snrdB_hat is complex number due to e-s2_n negative
-		if ~isreal(snrdB_hat) | isinf(snrdB_hat)
-			snrdB_hat = -200;
-		end	
-	else
-		e = 0;
-		snrdB_hat = 0;
-    end
-	
+    
 	% dft to get frequency domain representation
 	Xk_tmp = fft(xn);
 	Xk = Xk_tmp(1:ceil(N/2));
@@ -92,7 +78,7 @@ function out = feature_extract(xn, k1, k2, B1, B2, nn)
 	gamma4 = max((Ak4_abs(2:end)).^2)/N;
 	
 	% cumulants
-	% complex envelope of the sampled signal expressed as ...
+	% complex envelope of the sampled signal expressed as an
 	R_an = real(an);
 	I_an = imag(an);
 	CRR = (1/N)*sum(R_an.^2);

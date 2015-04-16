@@ -1,3 +1,20 @@
+% Simulation of signal corresponding to the OQPSK modulation format.
+%
+% Parameters
+% ----------
+% n : length of input symbols
+% fs : sampling frequency
+% sps : samples per symbol
+% fif : intermediate frequency
+% dsss : spreading factor
+% sd : sigma paramter for AWGN
+%
+% Returns
+% -------
+% xn_noise_if : received signal
+% sigpow : normalized signal power
+% nn : AWGN
+%
 function [xn_noise_if, sigpow, nn] = oqpsk_modulate(n, fs, sps, fif, dsss, sd)
 	
 	%symbol to chip mapping for oqpsk
