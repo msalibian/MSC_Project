@@ -12,9 +12,9 @@
 
 **Department of Statistics**
 
-This README file guides us through the workflow of our study. The workflow consists of 3 major components. First, modulation data is generated through MATLAB to obtain training and testing data. Second, models are fitted on the training data, and then predicted with the testing data. The models include feature-based tree (fbTree), classification tree (cTree) and random forest (rForest). Finally, predicitive performance is validated for each model.
+This README file guides us through the workflow of our study. The workflow consists of 3 major components. First, modulation data is simulated using MATLAB to obtain training and testing data. Second, models are fitted on the training data, and then predicted with the testing data. The models include feature-based tree (fbTree), classification tree (cTree) and random forest (rForest). Finally, predicitive performance is compared between the models.
 
-This README is complementary to the paper (to be posted later). 
+The 
 
 In all the following diagrams in this file, blue color encoding represents data, and orange color encoding represents action/script.
 
