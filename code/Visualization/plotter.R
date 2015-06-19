@@ -39,7 +39,6 @@ plotter.readFile = function(xCombnDf){
 # a = subset(resDf, snrdB==-25 & cl==6)
 # sum(a$res)/nrow(a)
 
-
 # Reads in the resDf with the new columns indicating whether predictions 
 # are correct. 
 # Group resDf by SNR and compute the success rate. 
