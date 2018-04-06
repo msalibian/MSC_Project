@@ -2,10 +2,10 @@
 
 **M.Sc. Project**
 
-**Ken Lau**
+**[Ken Lau](https://github.com/kenlau177**
 
 **Supervisors:** 
-- **Matías Salibián-Barrera**, Professor in Statistics
+- **[Matías Salibián-Barrera](https://github.com/msalibian)**, Professor in Statistics
 - **Lutz Lampe**, Professor in Electrical and Computer Engineering
 
 **UBC**
@@ -16,7 +16,7 @@ This README file guides us through the workflow of our study. The workflow consi
 
 For the M.Sc. report see: https://github.com/kenlau177/MSC_Project/blob/master/main.pdf
 
-The paper is in prepartion.
+The paper is [here](https://doi.org/10.1016/j.aeue.2016.07.001).
 
 In all the following diagrams in this file, blue color encoding represents data, and orange color encoding represents action/script.
 
