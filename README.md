@@ -16,7 +16,7 @@ This README file guides us through the workflow of our study. The workflow consi
 
 For the M.Sc. report see: https://github.com/kenlau177/MSC_Project/blob/master/main.pdf
 
-The paper is [here](https://doi.org/10.1016/j.aeue.2016.07.001).
+The paper is [here](https://doi.org/10.1016/j.aeue.2016.07.001) or [here](https://www.sciencedirect.com/science/article/pii/S1434841116303430).
 
 In all the following diagrams in this file, blue color encoding represents data, and orange color encoding represents action/script.
 
