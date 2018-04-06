@@ -2,7 +2,7 @@
 
 **M.Sc. Project**
 
-**[Ken Lau](https://github.com/kenlau177**
+**[Ken Lau](https://github.com/kenlau177)**
 
 **Supervisors:** 
 - **[Matías Salibián-Barrera](https://github.com/msalibian)**, Professor in Statistics
