@@ -6,7 +6,7 @@
 
 **Supervisors:** 
 - **[Matías Salibián-Barrera](https://github.com/msalibian)**, Professor in Statistics
-- **Lutz Lampe**, Professor in Electrical and Computer Engineering
+- **[Lutz Lampe](http://www.ece.ubc.ca/~lampe/)**, Professor in Electrical and Computer Engineering
 
 **UBC**
 
